@@ -4,7 +4,7 @@
 
 <p align="right">---Light Musicbox,light mood.</p>
 
- ![banner](.\bar.svg)
+ ![banner](../bar.svg)
 
 Light Musicbox是一款能够在线播放音乐的轻量级音乐播放器。目前正在完善当中。
 
@@ -38,5 +38,5 @@ Light Musicbox是一款能够在线播放音乐的轻量级音乐播放器。目
 
 ## License
 
-[MIT](.\LICENSE) © Richard Littauer
+[MIT](../LICENSE) © Richard Littauer
 
