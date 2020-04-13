@@ -11,7 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow,menu):
+        self.index = 0
+        self.menu = menu
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(793, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -60,10 +62,40 @@ class Ui_MainWindow(object):
         self.pushButton_2.setGeometry(QtCore.QRect(20, 30, 90, 27))
         self.pushButton_2.setObjectName("pushButton_2")
         self.frame_5 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_5.setGeometry(QtCore.QRect(99, 79, 691, 411))
+        self.frame_5.setGeometry(QtCore.QRect(100, 80, 691, 411))
         self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
+        self.label = QtWidgets.QLabel(self.frame_5)
+        self.label.setGeometry(QtCore.QRect(10, 16, 571, 20))
+        self.label.setObjectName("label")
+        self.pushButton_4 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_4.setGeometry(QtCore.QRect(590, 10, 90, 27))
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.label_3 = QtWidgets.QLabel(self.frame_5)
+        self.label_3.setGeometry(QtCore.QRect(10, 60, 571, 20))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.frame_5)
+        self.label_4.setGeometry(QtCore.QRect(10, 100, 571, 16))
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.frame_5)
+        self.label_5.setGeometry(QtCore.QRect(10, 140, 571, 16))
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.frame_5)
+        self.label_6.setGeometry(QtCore.QRect(10, 180, 561, 16))
+        self.label_6.setObjectName("label_6")
+        self.pushButton_5 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_5.setGeometry(QtCore.QRect(590, 50, 90, 27))
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.pushButton_6 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_6.setGeometry(QtCore.QRect(590, 90, 90, 27))
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.pushButton_7 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_7.setGeometry(QtCore.QRect(590, 130, 90, 27))
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.pushButton_8 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_8.setGeometry(QtCore.QRect(590, 170, 90, 27))
+        self.pushButton_8.setObjectName("pushButton_8")
         self.frame_6 = QtWidgets.QFrame(self.centralwidget)
         self.frame_6.setGeometry(QtCore.QRect(0, 0, 101, 541))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -84,10 +116,20 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.pushButton.clicked.connect(self.search)
+
+        self.pushButton_4.clicked.connect(self.clicked_0)
+        self.pushButton_5.clicked.connect(self.clicked_1)
+        self.pushButton_6.clicked.connect(self.clicked_2)
+        self.pushButton_7.clicked.connect(self.clicked_3)
+        self.pushButton_8.clicked.connect(self.clicked_4)
+
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton_3.setText(_translate("MainWindow", "播放"))
+        self.pushButton_3.setText(_translate("MainWindow", "播放/暂停"))
         self.radioButton.setText(_translate("MainWindow", "歌曲名"))
         self.radioButton_2.setText(_translate("MainWindow", "艺术家"))
         self.radioButton_3.setText(_translate("MainWindow", "专辑"))
@@ -95,4 +137,48 @@ class Ui_MainWindow(object):
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "在此键入数据"))
         self.pushButton.setText(_translate("MainWindow", "搜素"))
         self.pushButton_2.setText(_translate("MainWindow", "登录"))
+        self.label.setText(_translate("MainWindow", "此处显示信息"))
+        self.pushButton_4.setText(_translate("MainWindow", "确定"))
+        self.label_3.setText(_translate("MainWindow", "此处显示信息"))
+        self.label_4.setText(_translate("MainWindow", "此处显示信息"))
+        self.label_5.setText(_translate("MainWindow", "此处显示信息"))
+        self.label_6.setText(_translate("MainWindow", "此处显示信息"))
+        self.pushButton_5.setText(_translate("MainWindow", "确定"))
+        self.pushButton_6.setText(_translate("MainWindow", "确定"))
+        self.pushButton_7.setText(_translate("MainWindow", "确定"))
+        self.pushButton_8.setText(_translate("MainWindow", "确定"))
         self.label_2.setText(_translate("MainWindow", "列表"))
+
+    def search(self):
+        search_info = self.lineEdit.text()
+        res = self.menu.get_songs_info(search_info)
+
+        try:
+            self.label.setText(res[0])
+            self.label_3.setText(res[1])
+            self.label_4.setText(res[2])
+            self.label_5.setText(res[3])
+            self.label_6.setText(res[4])
+        except  Exception as e:
+            pass
+        finally:
+            pass
+
+
+    def clicked_0(self):
+        self.to_play_song(0)
+
+    def clicked_1(self):
+        self.to_play_song(1)
+
+
+    def clicked_2(self):
+        self.to_play_song(2)
+
+    def clicked_3(self):
+        self.to_play_song(3)
+    def clicked_4(self):
+        self.to_play_song(4)
+
+    def to_play_song(self,idx):
+        self.menu.play_which_song(idx)
