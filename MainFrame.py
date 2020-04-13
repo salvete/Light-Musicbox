@@ -152,10 +152,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "列表"))
 
     def play_or_pause(self):
-        self.menu.player.new_player_list("songs", self.menu.title, self.menu.datalist, -1)
-        self.menu.player.end_callback = None
-        self.menu.player.play_or_pause(self.index, self.menu.at_playing_list)
-        self.menu.at_playing_list = True
+        self.to_play_song(self.index)
 
     def search(self):
         search_info = self.lineEdit.text()
