@@ -12,7 +12,6 @@ import sys
 from future.builtins import str
 
 from menu import Menu
-from __version__ import __version__ as version
 
 
 def start():
