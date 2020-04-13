@@ -230,12 +230,6 @@ class Menu(object):
         except KeyError as e:
             return 0
 
-    def start_fork(self, version):
-        pid = os.fork()
-        if pid == 0:
-            Menu().update_alert(version)
-        else:
-            Menu().start()
 
     def play_pause(self):
         if self.player.is_empty:
