@@ -116,12 +116,14 @@ class Menu(object):
         self.djstack = []
         self.at_playing_list = False
         self.enter_flag = True
-        signal.signal(signal.SIGWINCH, self.change_term)
-        signal.signal(signal.SIGINT, self.send_kill)
+        # signal.signal(signal.SIGWINCH, self.change_term)
+        # signal.signal(signal.SIGINT, self.send_kill)
         self.menu_starts = time.time()
         self.countdown_start = time.time()
         self.countdown = -1
         self.is_in_countdown = False
+
+        self.keyword = ''
 
     @property
     def user(self):
@@ -178,8 +180,8 @@ class Menu(object):
 
         prompt, api_type, post_process = category_map[category]
         # keyword = self.ui.get_param(prompt)
-        keyword = str(input('Input the song\'s name:'))
-
+        # keyword = str(input('Input the song\'s name:'))
+        keyword = self.keyword
         if not keyword:
             return []
 
@@ -230,6 +232,12 @@ class Menu(object):
         except KeyError as e:
             return 0
 
+    def start_fork(self, version):
+        pid = os.fork()
+        if pid == 0:
+            Menu().update_alert(version)
+        else:
+            Menu().start()
 
     def play_pause(self):
         if self.player.is_empty:
@@ -398,7 +406,30 @@ class Menu(object):
                     print('{}.{}'.format(x,y['playlist_name']))
                 
 
+    def get_songs_info(self,search_info):
+        self.keyword = search_info
+        idx = 1;
+        SearchCategory = namedtuple("SearchCategory", ["type", "title"])
+        idx_map = {
+            0: SearchCategory("playlists", "精选歌单搜索列表"),
+            1: SearchCategory("songs", "歌曲搜索列表"),
+            2: SearchCategory("artists", "艺术家搜索列表"),
+            3: SearchCategory("albums", "专辑搜索列表"),
+        }
+        self.datatype, self.title = idx_map[idx]
+        self.datalist = self.search(self.datatype)
+        res = []
 
+        for idxx, val in enumerate(self.datalist):
+            res.append('{}-{}'.format(val['song_name'], val['artist']))
+            if idxx > 10:
+                break;
+        return res
+
+    def play_which_song(self,which):
+        self.player.new_player_list('songs', self.title, self.datalist, -1)
+        self.idx = which
+        self.player.play_or_pause(self.idx, self.at_playing_list)
                 
 
     def dispatch_enter(self, idx):
