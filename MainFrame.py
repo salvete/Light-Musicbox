@@ -152,6 +152,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "列表"))
 
     def play_or_pause(self):
+        print("pause................")
         self.to_play_song(self.index)
 
     def search(self):
