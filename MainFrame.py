@@ -173,22 +173,28 @@ class Ui_MainWindow(object):
 
     def clicked_0(self):
         self.index = 0
+        self.menu.index = 0
         self.to_play_song(0)
 
     def clicked_1(self):
         self.index = 1
+        self.menu.index = 1
         self.to_play_song(1)
 
 
     def clicked_2(self):
         self.index = 2
+        self.menu.index = 2
         self.to_play_song(2)
 
     def clicked_3(self):
         self.index = 3
+        self.menu.index = 4
         self.to_play_song(3)
+        
     def clicked_4(self):
         self.index = 4
+        self.menu.index = 4
         self.to_play_song(4)
 
     def to_play_song(self,idx):
