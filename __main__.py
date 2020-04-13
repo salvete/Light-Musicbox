@@ -30,7 +30,7 @@ def start():
 
     nembox_menu = Menu()
     try:
-		nembox_menu.start()
+	    nembox_menu.start()
     except (OSError, TypeError, ValueError, KeyError, IndexError):
         # clean up terminal while failed
         print('failed......................')
