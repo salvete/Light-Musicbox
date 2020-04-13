@@ -118,6 +118,8 @@ class Ui_MainWindow(object):
 
         self.pushButton.clicked.connect(self.search)
 
+
+
         self.pushButton_4.clicked.connect(self.clicked_0)
         self.pushButton_5.clicked.connect(self.clicked_1)
         self.pushButton_6.clicked.connect(self.clicked_2)
@@ -149,6 +151,12 @@ class Ui_MainWindow(object):
         self.pushButton_8.setText(_translate("MainWindow", "确定"))
         self.label_2.setText(_translate("MainWindow", "列表"))
 
+    def play_or_pause(self):
+        self.menu.player.new_player_list("songs", self.menu.title, self.menu.datalist, -1)
+        self.menu.player.end_callback = None
+        self.menu.player.play_or_pause(self.index, self.menu.at_playing_list)
+        self.menu.at_playing_list = True
+
     def search(self):
         search_info = self.lineEdit.text()
         res = self.menu.get_songs_info(search_info)
@@ -166,18 +174,23 @@ class Ui_MainWindow(object):
 
 
     def clicked_0(self):
+        self.index = 0
         self.to_play_song(0)
 
     def clicked_1(self):
+        self.index = 1
         self.to_play_song(1)
 
 
     def clicked_2(self):
+        self.index = 2
         self.to_play_song(2)
 
     def clicked_3(self):
+        self.index = 3
         self.to_play_song(3)
     def clicked_4(self):
+        self.index = 4
         self.to_play_song(4)
 
     def to_play_song(self,idx):
