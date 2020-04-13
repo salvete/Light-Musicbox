@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'MainFrame.ui'
@@ -96,3 +97,19 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "搜素"))
         self.pushButton_2.setText(_translate("MainWindow", "登录"))
         self.label_2.setText(_translate("MainWindow", "列表"))
+=======
+import  sys
+from PyQt5.QtWidgets import QApplication,QMainWindow
+from MainFrame import Ui_MainWindow
+
+class UI(QMainWindow,Ui_MainWindow):
+    def __init__(self,parent=None):
+        super(UI,self).__init__(parent)
+        self.setupUi(self)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ui = UI()
+    ui.show()
+    sys.exit(app.exec_())
+>>>>>>> 01c4111cdcc4ec1a3cc8be9a3be2c7f561a1ce54
