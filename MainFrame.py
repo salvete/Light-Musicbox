@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
 
         self.pushButton.clicked.connect(self.search)
 
-
+        self.pushButton_3.clicked.connect(self.play_or_pause)
 
         self.pushButton_4.clicked.connect(self.clicked_0)
         self.pushButton_5.clicked.connect(self.clicked_1)
