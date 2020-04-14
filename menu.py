@@ -166,7 +166,35 @@ class Menu(object):
             # x = self.ui.build_login_error()
             # if x != ord("1"):
             #     return False
+
             return self.login()
+
+    def to_login(self,username,passwd):
+        if self.account and self.md5pass:
+            account, md5pass = self.account, self.md5pass
+        else:
+            # modified
+            # account = str(input('name:'))
+            # password = str(input('password:'))
+            account = username
+            password = passwd
+            md5pass = hashlib.md5(password.encode("utf-8")).hexdigest()
+
+        resp = self.api.login(account, md5pass)
+        if resp["code"] == 200:
+            userid = resp["account"]["id"]
+            nickname = resp["profile"]["nickname"]
+            self.storage.login(account, md5pass, userid, nickname)
+            print('that is right........')
+            return True
+        else:
+            self.storage.logout()
+            # x = self.ui.build_login_error()
+            # if x != ord("1"):
+            #     return False
+
+            # return self.login()
+            return False
 
     def search(self, category):
         # self.ui.screen.timeout(-1)

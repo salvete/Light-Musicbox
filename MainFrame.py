@@ -8,7 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from login import Ui_Dialog
+import utils
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow,menu):
@@ -16,6 +17,8 @@ class Ui_MainWindow(object):
         self.index = 0
         self.menu = menu
         self.timer = QtCore.QTimer()
+        self.username = ''
+        self.passwd = ''
 
 
         ########################################################
@@ -139,6 +142,8 @@ class Ui_MainWindow(object):
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(100)
 
+        self.pushButton_2.clicked.connect(self.login)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -230,5 +235,28 @@ class Ui_MainWindow(object):
     def closeEvent(self,e):
             self.menu.player.stop()
             self.menu.storage.save()
+            self.menu.api.logout()
+
+    def login(self):
+
+        dia = QtWidgets.QDialog()
+        lgin = Ui_Dialog()
+        lgin.setupUi(dia,self)
+        dia.show()
+        dia.exec()
+
+        if self.menu.to_login(self.username,self.passwd):
+            utils.notify('登录成功')
+            myplaylist = self.menu.request_api(self.menu.api.user_playlist, self.menu.userid)
+            self.menu.datatype = 'top_playlists'
+            myplaylist = self.menu.api.dig_info(myplaylist, self.menu.datatype)
+            print(myplaylist)
+        else:
+            utils.notify('登录失败，请重新登录')
+            self.login()
+
+
+
+
        
 
