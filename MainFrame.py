@@ -215,4 +215,11 @@ class Ui_MainWindow(object):
         now,total = self.menu.now_total_time()
         self.progressBar.setValue(now/(total+0.00001)*100)
         self.progressBar.repaint()
-        print('now:{},total:{}'.format(now,total))
+        self.progressBar.setFormat('{}/{}'.format(self.shift_time(now),self.shift_time(total)))
+
+        print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
+        
+    def shift_time(self,time_val):
+        m = time_val/60;
+        s = time_val % 60;
+        return '{}:{}'.format(m,s)
