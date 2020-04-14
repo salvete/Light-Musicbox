@@ -168,6 +168,8 @@ class Ui_MainWindow(object):
         self.to_play_song(self.index)
 
     def search(self):
+        self.menu.at_playing_list = False
+        
         search_info = self.lineEdit.text()
         res = self.menu.get_songs_info(search_info)
 
@@ -186,32 +188,27 @@ class Ui_MainWindow(object):
     def clicked_0(self):
         self.index = 0
         self.menu.index = 0
-        self.menu.at_playing_list = False
         self.to_play_song(0)
 
     def clicked_1(self):
         self.index = 1
         self.menu.index = 1
-        self.menu.at_playing_list = False
         self.to_play_song(1)
 
 
     def clicked_2(self):
         self.index = 2
         self.menu.index = 2
-        self.menu.at_playing_list = False
         self.to_play_song(2)
 
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
-        self.menu.at_playing_list = False
         self.to_play_song(3)
 
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
-        self.menu.at_playing_list = False
         self.to_play_song(4)
 
     def to_play_song(self,idx):
