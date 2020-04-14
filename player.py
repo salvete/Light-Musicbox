@@ -389,6 +389,7 @@ class Player(object):
             return
 
 
+        print('flag:',switch_flag)
 
 
         # if same "list index" and "playing index" --> same song :: pause/resume it
