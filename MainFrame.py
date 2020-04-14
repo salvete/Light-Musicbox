@@ -247,13 +247,8 @@ class Ui_MainWindow(object):
 
         if self.menu.to_login(self.username,self.passwd):
             utils.notify('登录成功')
-            myplaylist = self.menu.request_api(self.menu.api.user_playlist, self.menu.userid)
-            self.menu.datatype = 'top_playlists'
-            myplaylist = self.menu.api.dig_info(myplaylist, self.menu.datatype)
-            print(myplaylist)
         else:
             utils.notify('登录失败，请重新登录')
-            self.login()
 
 
 

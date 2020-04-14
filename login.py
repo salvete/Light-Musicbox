@@ -56,7 +56,7 @@ class Ui_Dialog(object):
         passwd = self.lineEdit_2.text()
         self.MainWindow.username = username
         self.MainWindow.passwd = passwd
-        print(self.MainWindow.username,self.MainWindow.passwd,sep=' ')
+        # print(self.MainWindow.username,self.MainWindow.passwd,sep=' ')
         self.dialog.close()
 
 if __name__ == '__main__':
