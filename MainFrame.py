@@ -213,5 +213,5 @@ class Ui_MainWindow(object):
 
     def time_out(self):
         now,total = self.menu.now_total_time()
-        self.progressBar.setValue(now/total*100)
+        self.progressBar.setValue(now/(total+0.00001)*100)
         self.progressBar.repaint()
