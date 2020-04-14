@@ -431,7 +431,7 @@ class Menu(object):
         #         #  self.idx = which
         # self.player.play_or_pause(self.idx, self.at_playing_list)
 
-        print('self.at...',self.at_playing_list)
+        # print('self.at...',self.at_playing_list)
 
         self.player.new_player_list("songs", self.title, self.datalist, -1)
 

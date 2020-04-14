@@ -220,7 +220,7 @@ class Ui_MainWindow(object):
         self.progressBar.repaint()
         self.progressBar.setFormat('{}/{}'.format(self.shift_time(now),self.shift_time(total)))
 
-        print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
+        # print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
         
     def shift_time(self,time_val):
         m = int(time_val/60);
