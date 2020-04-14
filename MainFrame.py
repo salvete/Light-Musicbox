@@ -164,6 +164,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "列表"))
 
     def play_or_pause(self):
+        self.menu.at_playing_list = True
         self.to_play_song(self.index)
 
     def search(self):
@@ -185,27 +186,32 @@ class Ui_MainWindow(object):
     def clicked_0(self):
         self.index = 0
         self.menu.index = 0
+        self.menu.at_playing_list = False
         self.to_play_song(0)
 
     def clicked_1(self):
         self.index = 1
         self.menu.index = 1
+        self.menu.at_playing_list = False
         self.to_play_song(1)
 
 
     def clicked_2(self):
         self.index = 2
         self.menu.index = 2
+        self.menu.at_playing_list = False
         self.to_play_song(2)
 
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
+        self.menu.at_playing_list = False
         self.to_play_song(3)
 
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
+        self.menu.at_playing_list = False
         self.to_play_song(4)
 
     def to_play_song(self,idx):
