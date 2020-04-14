@@ -164,12 +164,12 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "列表"))
 
     def play_or_pause(self):
-        self.menu.at_playing_list = True
+        self.menu.at_playing_list = False
         self.to_play_song(self.index)
 
     def search(self):
-        self.menu.at_playing_list = False
-        
+        self.menu.at_playing_list = True
+
         search_info = self.lineEdit.text()
         res = self.menu.get_songs_info(search_info)
 
