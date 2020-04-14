@@ -226,3 +226,9 @@ class Ui_MainWindow(object):
         m = int(time_val/60);
         s = int(time_val % 60);
         return '{}:{}'.format(m,s)
+
+    def closeEvent(self,e):
+            self.menu.player.stop()
+            self.menu.storage.save()
+       
+
