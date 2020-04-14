@@ -12,8 +12,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow,menu):
+
         self.index = 0
         self.menu = menu
+        self.timer = QtCore.QTimer()
+
+
+        ########################################################
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(793, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -116,6 +121,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+        ##################################################
         self.pushButton.clicked.connect(self.search)
 
         self.pushButton_3.clicked.connect(self.play_or_pause)
@@ -126,6 +133,11 @@ class Ui_MainWindow(object):
         self.pushButton_7.clicked.connect(self.clicked_3)
         self.pushButton_8.clicked.connect(self.clicked_4)
 
+        self.timer.timeout.connect(self.time_out)
+        self.timer.start(1000)
+
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(100)
 
 
     def retranslateUi(self, MainWindow):
@@ -190,7 +202,7 @@ class Ui_MainWindow(object):
         self.index = 3
         self.menu.index = 4
         self.to_play_song(3)
-        
+
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
@@ -198,3 +210,8 @@ class Ui_MainWindow(object):
 
     def to_play_song(self,idx):
         self.menu.play_which_song(idx)
+
+    def time_out(self):
+        now,total = self.menu.now_total_time()
+        self.progressBar.setValue(now/total*100)
+        self.progressBar.repaint()
