@@ -437,6 +437,11 @@ class Menu(object):
         self.at_playing_list = True
                 
 
+    def now_total_time(self):
+        return self.player.process_location,self.player.process_length
+
+
+
     def dispatch_enter(self, idx):
         # The end of stack
         netease = self.api
