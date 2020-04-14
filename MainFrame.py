@@ -220,6 +220,6 @@ class Ui_MainWindow(object):
         print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
         
     def shift_time(self,time_val):
-        m = time_val/60;
-        s = time_val % 60;
+        m = int(time_val/60);
+        s = int(time_val % 60);
         return '{}:{}'.format(m,s)
