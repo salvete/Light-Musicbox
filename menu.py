@@ -427,10 +427,21 @@ class Menu(object):
         return res
 
     def play_which_song(self,which):
-        self.player.new_player_list('songs', self.title, self.datalist, -1)
-        self.idx = which
-        self.player.play_or_pause(self.idx, self.at_playing_list)
-                
+        # self.player.new_player_list('songs', self.title, self.datalist, -1)
+        #         #  self.idx = which
+        # self.player.play_or_pause(self.idx, self.at_playing_list)
+
+        self.player.new_player_list("songs", self.title, self.datalist, -1)
+        self.player.end_callback = None
+        # self.player.play_or_pause(which, self.at_playing_list)
+        self.player.play_or_pause(which, True)
+        self.at_playing_list = True
+        
+
+    def now_total_time(self):
+        return self.player.process_location,self.player.process_length
+
+
 
     def dispatch_enter(self, idx):
         # The end of stack
