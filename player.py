@@ -388,13 +388,21 @@ class Player(object):
         if self.is_empty:
             return
 
+
+        # print('flag:',switch_flag)
+
+
         # if same "list index" and "playing index" --> same song :: pause/resume it
         if self.index == idx and switch_flag:
             if not self.popen_handler:
+                # print('aaaaaa')
                 self.replay()
             else:
+                # print('bbbbbb')
                 self.switch()
+
         else:
+            # print('cccccccc')
             self.info["idx"] = idx
             self.stop()
             self.replay()
