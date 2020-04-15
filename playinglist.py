@@ -51,7 +51,7 @@ class MyLabel(QtWidgets.QLabel):
                 hotcomments = comcomments = []
             to_display = []
             for one_comment in hotcomments:
-                to_display.append('{}:{}\t有{}人觉得很赞\n'.format(one_comment["likedCount"],\
+                to_display.append('有{}人觉得很赞\t\t{}:{}\n\n'.format(one_comment["likedCount"],\
                 one_comment["user"]["nickname"], one_comment["content"]))
 
             mydia.showcommend(to_display)
