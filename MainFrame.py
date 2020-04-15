@@ -224,12 +224,19 @@ class Ui_MainWindow(object):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
                 if idxx > 10:
                     break;
+            self.label.setText('')
+            self.label_3.setText('')
+            self.label_4.setText('')
+            self.label_5.setText('')
+            self.label_6.setText('')
+                    
             try:
-                self.label.setText(res[0])
-                self.label_3.setText(res[1])
-                self.label_4.setText(res[2])
-                self.label_5.setText(res[3])
-                self.label_6.setText(res[4])
+                    self.label.setText(res[0])
+                    self.label_3.setText(res[1])
+                    self.label_4.setText(res[2])
+                    self.label_5.setText(res[3])
+                    self.label_6.setText(res[4])
+                    
             except  Exception as e:
                 pass
             finally:
