@@ -598,7 +598,7 @@ class Ui_MainWindow(object):
             self.playing_list_id.add(song_id)
             self.cnt_song_num = self.cnt_song_num + 1
             # self.wd = QtWidgets.QLabel(self.frame_6_1)
-            self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,parent=self.frame_6_1)
+            self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,song_id=song_id,parent=self.frame_6_1)
             self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
             self.wd.setObjectName("pushbutton_100")
             self.wd.setText(song_name)
