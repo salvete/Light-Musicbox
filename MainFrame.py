@@ -21,6 +21,7 @@ class Ui_MainWindow(object):
         self.timer = QtCore.QTimer()
         self.username = ''
         self.passwd = ''
+        self.check_radio = 1
 
         ########################################################
         MainWindow.setObjectName("MainWindow")
@@ -156,10 +157,12 @@ class Ui_MainWindow(object):
 
         self.pushButton_2.clicked.connect(self.login)
 
+        self.radioButton.setChecked(True)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Light Musicbox"))
         self.pushButton_3.setText(_translate("MainWindow", "播放/暂停"))
         self.radioButton.setText(_translate("MainWindow", "歌曲名"))
         self.radioButton_2.setText(_translate("MainWindow", "艺术家"))
@@ -188,7 +191,19 @@ class Ui_MainWindow(object):
         self.menu.at_playing_list = False
 
         search_info = self.lineEdit.text()
-        res = self.menu.get_songs_info(search_info)
+
+        if self.radioButton.isChecked():
+            self.check_radio = 1
+            res = self.menu.get_songs_info(search_info,1)
+        elif self.radioButton_2.isChecked():
+            self.check_radio = 2
+            res = self.menu.get_songs_info(search_info, 2)
+        elif self.radioButton_3.isChecked():
+            self.check_radio = 3
+            res = self.menu.get_songs_info(search_info, 3)
+        else:
+            self.check_radio = -1
+            res = self.menu.get_songs_info('', 3)
 
         try:
             self.label.setText(res[0])
@@ -205,36 +220,206 @@ class Ui_MainWindow(object):
     def clicked_0(self):
         self.index = 0
         self.menu.index = 0
-        self.to_play_song(0)
-        self.add_playing_list()    
+
+
+        if self.check_radio == 1:
+            self.to_play_song(self.index)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            self.check_radio = 1
+            album_id = self.menu.datalist[self.index]["album_id"]
+            songs =self.menu.api.album(album_id)
+            self.menu.datatype = "songs"
+            self.menu.datalist = self.menu.api.dig_info(songs, "songs")
+            res = []
+            for idxx, val in enumerate(self.menu.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+            self.label.setText('')
+            self.label_3.setText('')
+            self.label_4.setText('')
+            self.label_5.setText('')
+            self.label_6.setText('')
+
+            try:
+                    self.label.setText(res[0])
+                    self.label_3.setText(res[1])
+                    self.label_4.setText(res[2])
+                    self.label_5.setText(res[3])
+                    self.label_6.setText(res[4])
+
+            except  Exception as e:
+                pass
+            finally:
+                pass
+
+        else:
+            pass
+
 
     def clicked_1(self):
         self.index = 1
         self.menu.index = 1
-        self.to_play_song(1)
-        self.add_playing_list()
 
+        if self.check_radio == 1:
+            self.to_play_song(self.index)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            self.check_radio = 1
+            album_id = self.menu.datalist[self.index]["album_id"]
+            songs =self.menu.api.album(album_id)
+            self.menu.datatype = "songs"
+            self.menu.datalist = self.menu.api.dig_info(songs, "songs")
+            res = []
+            for idxx, val in enumerate(self.menu.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+            self.label.setText('')
+            self.label_3.setText('')
+            self.label_4.setText('')
+            self.label_5.setText('')
+            self.label_6.setText('')
+
+            try:
+                    self.label.setText(res[0])
+                    self.label_3.setText(res[1])
+                    self.label_4.setText(res[2])
+                    self.label_5.setText(res[3])
+                    self.label_6.setText(res[4])
+
+            except  Exception as e:
+                pass
+            finally:
+                pass
+
+        else:
+            pass
 
     def clicked_2(self):
         self.index = 2
         self.menu.index = 2
-        self.to_play_song(2)
-        self.add_playing_list()
+
+        if self.check_radio == 1:
+            self.to_play_song(self.index)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            self.check_radio = 1
+            album_id = self.menu.datalist[self.index]["album_id"]
+            songs =self.menu.api.album(album_id)
+            self.menu.datatype = "songs"
+            self.menu.datalist = self.menu.api.dig_info(songs, "songs")
+            res = []
+            for idxx, val in enumerate(self.menu.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+            self.label.setText('')
+            self.label_3.setText('')
+            self.label_4.setText('')
+            self.label_5.setText('')
+            self.label_6.setText('')
+
+            try:
+                    self.label.setText(res[0])
+                    self.label_3.setText(res[1])
+                    self.label_4.setText(res[2])
+                    self.label_5.setText(res[3])
+                    self.label_6.setText(res[4])
+
+            except  Exception as e:
+                pass
+            finally:
+                pass
+
+        else:
+            pass
 
 
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
-        self.to_play_song(3)
-        self.add_playing_list()
 
+
+        if self.check_radio == 1:
+            self.to_play_song(self.index)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            self.check_radio = 1
+            album_id = self.menu.datalist[self.index]["album_id"]
+            songs =self.menu.api.album(album_id)
+            self.menu.datatype = "songs"
+            self.menu.datalist = self.menu.api.dig_info(songs, "songs")
+            res = []
+            for idxx, val in enumerate(self.menu.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+            self.label.setText('')
+            self.label_3.setText('')
+            self.label_4.setText('')
+            self.label_5.setText('')
+            self.label_6.setText('')
+
+            try:
+                    self.label.setText(res[0])
+                    self.label_3.setText(res[1])
+                    self.label_4.setText(res[2])
+                    self.label_5.setText(res[3])
+                    self.label_6.setText(res[4])
+
+            except  Exception as e:
+                pass
+            finally:
+                pass
+
+        else:
+            pass
 
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
-        self.to_play_song(4)
-        self.add_playing_list()
 
+        if self.check_radio == 1:
+            self.to_play_song(self.index)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            self.check_radio = 1
+            album_id = self.menu.datalist[self.index]["album_id"]
+            songs =self.menu.api.album(album_id)
+            self.menu.datatype = "songs"
+            self.menu.datalist = self.menu.api.dig_info(songs, "songs")
+            res = []
+            for idxx, val in enumerate(self.menu.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+            self.label.setText('')
+            self.label_3.setText('')
+            self.label_4.setText('')
+            self.label_5.setText('')
+            self.label_6.setText('')
+
+            try:
+                    self.label.setText(res[0])
+                    self.label_3.setText(res[1])
+                    self.label_4.setText(res[2])
+                    self.label_5.setText(res[3])
+                    self.label_6.setText(res[4])
+
+            except  Exception as e:
+                pass
+            finally:
+                pass
+
+        else:
+            pass
 
     def to_play_song(self,idx):
         self.menu.play_which_song(idx)
@@ -276,13 +461,8 @@ class Ui_MainWindow(object):
 
         if self.menu.to_login(self.username,self.passwd):
             utils.notify('登录成功')
-            myplaylist = self.menu.request_api(self.menu.api.user_playlist, self.menu.userid)
-            self.menu.datatype = 'top_playlists'
-            myplaylist = self.menu.api.dig_info(myplaylist, self.menu.datatype)
-            print(myplaylist)
         else:
             utils.notify('登录失败，请重新登录')
-            self.login()
 
 
 

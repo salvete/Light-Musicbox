@@ -434,9 +434,14 @@ class Menu(object):
                     print('{}.{}'.format(x,y['playlist_name']))
                 
 
-    def get_songs_info(self,search_info):
+    def get_songs_info(self,search_info,choice):
         self.keyword = search_info
-        idx = 1;
+
+        if choice<0 or choice>3:
+            notify('选择有误')
+            return
+
+        idx = choice;
         SearchCategory = namedtuple("SearchCategory", ["type", "title"])
         idx_map = {
             0: SearchCategory("playlists", "精选歌单搜索列表"),
@@ -447,12 +452,30 @@ class Menu(object):
         self.datatype, self.title = idx_map[idx]
         self.datalist = self.search(self.datatype)
         res = []
+        if choice == 1:
+            for idxx, val in enumerate(self.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+        elif choice == 2:
+            for idxx, val in enumerate(self.datalist):
+                res.append('艺术家:{}'.format(val['artists_name']))
+                if idxx > 10:
+                    break;
 
-        for idxx, val in enumerate(self.datalist):
-            res.append('{}-{}'.format(val['song_name'], val['artist']))
-            if idxx > 10:
-                break;
+        elif choice == 3:
+            # print(self.datalist)
+            for idxx, val in enumerate(self.datalist):
+                res.append('{}(专辑)-{}(艺术家)'.format(val['albums_name'], val['artists_name']))
+                if idxx > 10:
+                    break;
+        else:
+            pass
+
+
         return res
+
+
 
     def play_which_song(self,which):
         # self.player.new_player_list('songs', self.title, self.datalist, -1)
