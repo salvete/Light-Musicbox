@@ -19,6 +19,7 @@ class Ui_MainWindow(object):
         self.timer = QtCore.QTimer()
         self.username = ''
         self.passwd = ''
+        self.check_radio = 1
 
 
         ########################################################
@@ -180,12 +181,16 @@ class Ui_MainWindow(object):
         search_info = self.lineEdit.text()
 
         if self.radioButton.isChecked():
+            self.check_radio = 1
             res = self.menu.get_songs_info(search_info,1)
         elif self.radioButton_2.isChecked():
+            self.check_radio = 2
             res = self.menu.get_songs_info(search_info, 2)
         elif self.radioButton_3.isChecked():
+            self.check_radio = 3
             res = self.menu.get_songs_info(search_info, 3)
         else:
+            self.check_radio = -1
             res = self.menu.get_songs_info('', 3)
 
         try:
@@ -203,28 +208,83 @@ class Ui_MainWindow(object):
     def clicked_0(self):
         self.index = 0
         self.menu.index = 0
-        self.to_play_song(0)
+
+        if self.check_radio == 1:
+            self.to_play_song(0)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            self.check_radio = 1
+            album_id = self.menu.datalist[self.index]["album_id"]
+            songs =self.menu.api.album(album_id)
+            self.menu.datatype = "songs"
+            self.menu.datalist = self.menu.api.dig_info(songs, "songs")
+            res = []
+            for idxx, val in enumerate(self.menu.datalist):
+                res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
+                if idxx > 10:
+                    break;
+            try:
+                self.label.setText(res[0])
+                self.label_3.setText(res[1])
+                self.label_4.setText(res[2])
+                self.label_5.setText(res[3])
+                self.label_6.setText(res[4])
+            except  Exception as e:
+                pass
+            finally:
+                pass
+
+        else:
+            pass
 
     def clicked_1(self):
         self.index = 1
         self.menu.index = 1
-        self.to_play_song(1)
-
+        if self.check_radio == 1:
+            self.to_play_song(1)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            pass
+        else:
+            pass
 
     def clicked_2(self):
         self.index = 2
         self.menu.index = 2
-        self.to_play_song(2)
+        if self.check_radio == 1:
+            self.to_play_song(2)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            pass
+        else:
+            pass
 
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
-        self.to_play_song(3)
+        if self.check_radio == 1:
+            self.to_play_song(3)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            pass
+        else:
+            pass
 
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
-        self.to_play_song(4)
+        if self.check_radio == 1:
+            self.to_play_song(4)
+        elif self.check_radio == 2:
+            pass
+        elif self.check_radio == 3:
+            pass
+        else:
+            pass
 
     def to_play_song(self,idx):
         self.menu.play_which_song(idx)
