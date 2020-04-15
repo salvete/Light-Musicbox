@@ -4,14 +4,20 @@ from PyQt5.QtWidgets import QApplication, QMenu, QAction
 
 
 class MyLabel(QtWidgets.QLabel):
-    def __init__(self, parent=None):
+    def __init__(self,MainWindow,datalist,idx, parent=None):
         super(MyLabel, self).__init__(parent)
+        self.MainWindow = MainWindow
+        self.datalist = datalist
+        self.idx = idx
         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.rightMenuShow)
 
     # 双击播放响应
     def mouseDoubleClickEvent(self, e):
-        print('mouse double clicked')
+        self.MainWindow.menu.datalist = self.datalist
+        self.MainWindow.menu.at_playing_list = False
+        self.MainWindow.menu.index = self.idx
+        self.MainWindow.to_play_song(self.idx)
 
     # 右键菜单项生成
     def rightMenuShow(self, pos):
@@ -28,7 +34,10 @@ class MyLabel(QtWidgets.QLabel):
     def actionHandler(self, act):
         print(act.text())
         if act.text() == '播放':
-            print("hello,world!")
+            self.MainWindow.menu.datalist = self.datalist
+            self.MainWindow.menu.at_playing_list = False
+            self.MainWindow.menu.index = self.idx
+            self.MainWindow.to_play_song(self.idx)
 
     def mouseReleaseEvent(self, e):
         pass

@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from login import Ui_Dialog
 import utils
-
+from playinglist import MyLabel
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, menu):
@@ -230,6 +230,7 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
+            self.add_playing_list(self.menu.datalist, self.index)
 
         elif self.check_radio == 2:
             self.check_radio = 1
@@ -298,6 +299,7 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
+            self.add_playing_list(self.menu.datalist,self.index)
 
         elif self.check_radio == 2:
             self.check_radio = 1
@@ -366,6 +368,8 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
+            self.add_playing_list(self.menu.datalist, self.index)
+
 
         elif self.check_radio == 2:
             self.check_radio = 1
@@ -434,6 +438,7 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
+            self.add_playing_list(self.menu.datalist, self.index)
 
         elif self.check_radio == 2:
             self.check_radio = 1
@@ -502,6 +507,7 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
+            self.add_playing_list(self.menu.datalist, self.index)
 
         elif self.check_radio == 2:
             self.check_radio = 1
@@ -582,12 +588,15 @@ class Ui_MainWindow(object):
         return '{}:{}'.format(m, s)
 
     ##将当前播放到歌曲添加到播放列表
-    def add_playing_list(self):
+    def add_playing_list(self,datalist,idx):
         self.cnt_song_num = self.cnt_song_num + 1
-        self.wd = QtWidgets.QLabel(self.frame_6_1)
+        # self.wd = QtWidgets.QLabel(self.frame_6_1)
+        self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,parent=self.frame_6_1)
         self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
         self.wd.setObjectName("pushbutton_100")
-        self.wd.setText(self.menu.player.current_song["song_name"])
+        song_id = self.menu.storage.database['player_info']['player_list'][idx]
+        song_name = self.menu.storage.database['songs'].get(song_id,{})['song_name']
+        self.wd.setText(song_name)
         self.wd.show()
 
 
