@@ -55,6 +55,7 @@ class MyLabel(QtWidgets.QLabel):
                 one_comment["user"]["nickname"], one_comment["content"]))
 
             mydia.showcommend(to_display)
+            dia.setWindowTitle('评论')
             dia.show()
             dia.exec()
 
@@ -64,9 +65,10 @@ class MyLabel(QtWidgets.QLabel):
             mydia.setupUi(dia)
             lyrics = self.MainWindow.menu.api.song_lyric(self.song_id)
             mydia.showcommend(lyrics)
+            dia.setWindowTitle('歌词')
             dia.show()
             dia.exec()
-            
+
         else:
             pass
 
