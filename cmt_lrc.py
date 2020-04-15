@@ -11,7 +11,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import time
 
-
 class MyDialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -31,7 +30,7 @@ class MyDialog(object):
         for i in content:
             self.textBrowser.append(i)
             self.textBrowser.moveCursor(self.textBrowser.textCursor().End)
-            time.sleep(0.2)
+            # time.sleep(0.001)
 
 
 if __name__ == '__main__':
