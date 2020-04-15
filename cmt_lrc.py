@@ -14,7 +14,7 @@ import time
 class MyDialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(604, 300)
+        Dialog.resize(604, 500)
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser.setGeometry(QtCore.QRect(0, 0, 611, 301))
         self.textBrowser.setObjectName("textBrowser")
