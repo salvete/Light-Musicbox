@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         # 记录播放列表的歌的数量
         self.cnt_song_num = 0
         #已经在列表中的歌曲的id
-        self.playing_list_id = {}
+        self.playing_list_id = set()
 
         self.index = 0
         self.menu = menu
