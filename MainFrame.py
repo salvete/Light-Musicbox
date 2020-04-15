@@ -440,11 +440,8 @@ class Ui_MainWindow(object):
         self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
         self.wd.setObjectName("pushbutton_100")
         self.wd.setText(self.menu.player.current_song["song_name"])
-        self.wd.mouseDoubleClickEvent.connect(self.test_fun)
         self.wd.show()
 
-    def test_fun(self,e):
-        print('hello,world')
 
     def closeEvent(self, e):
         self.menu.player.stop()
