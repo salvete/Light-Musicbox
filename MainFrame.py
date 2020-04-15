@@ -8,7 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from login import Ui_Dialog
+import utils
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow,menu):
@@ -18,6 +19,8 @@ class Ui_MainWindow(object):
         self.index = 0
         self.menu = menu
         self.timer = QtCore.QTimer()
+        self.username = ''
+        self.passwd = ''
 
         ########################################################
         MainWindow.setObjectName("MainWindow")
@@ -151,6 +154,8 @@ class Ui_MainWindow(object):
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(100)
 
+        self.pushButton_2.clicked.connect(self.login)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -180,6 +185,8 @@ class Ui_MainWindow(object):
         self.to_play_song(self.index)
 
     def search(self):
+        self.menu.at_playing_list = False
+
         search_info = self.lineEdit.text()
         res = self.menu.get_songs_info(search_info)
 
@@ -198,14 +205,12 @@ class Ui_MainWindow(object):
     def clicked_0(self):
         self.index = 0
         self.menu.index = 0
-        self.menu.at_playing_list = False
         self.to_play_song(0)
         self.add_playing_list()    
 
     def clicked_1(self):
         self.index = 1
         self.menu.index = 1
-        self.menu.at_playing_list = False
         self.to_play_song(1)
         self.add_playing_list()
 
@@ -213,7 +218,6 @@ class Ui_MainWindow(object):
     def clicked_2(self):
         self.index = 2
         self.menu.index = 2
-        self.menu.at_playing_list = False
         self.to_play_song(2)
         self.add_playing_list()
 
@@ -221,7 +225,6 @@ class Ui_MainWindow(object):
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
-        self.menu.at_playing_list = False
         self.to_play_song(3)
         self.add_playing_list()
 
@@ -229,7 +232,6 @@ class Ui_MainWindow(object):
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
-        self.menu.at_playing_list = False
         self.to_play_song(4)
         self.add_playing_list()
 
@@ -244,13 +246,12 @@ class Ui_MainWindow(object):
         self.progressBar.repaint()
         self.progressBar.setFormat('{}/{}'.format(self.shift_time(now),self.shift_time(total)))
 
-        print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
+        # print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
         
     def shift_time(self,time_val):
         m = int(time_val/60);
         s = int(time_val % 60);
         return '{}:{}'.format(m,s)
-
     ##将当前播放到歌曲添加到播放列表
     def add_playing_list(self):
         self.cnt_song_num = self.cnt_song_num+1
@@ -259,3 +260,33 @@ class Ui_MainWindow(object):
         self.wd.setObjectName("pushbutton_100")
         self.wd.setText(self.menu.player.current_song["song_name"])
         self.wd.show()
+
+    def closeEvent(self,e):
+            self.menu.player.stop()
+            self.menu.storage.save()
+            self.menu.api.logout()
+
+    def login(self):
+
+        dia = QtWidgets.QDialog()
+        lgin = Ui_Dialog()
+        lgin.setupUi(dia,self)
+        dia.show()
+        dia.exec()
+
+        if self.menu.to_login(self.username,self.passwd):
+            utils.notify('登录成功')
+            myplaylist = self.menu.request_api(self.menu.api.user_playlist, self.menu.userid)
+            self.menu.datatype = 'top_playlists'
+            myplaylist = self.menu.api.dig_info(myplaylist, self.menu.datatype)
+            print(myplaylist)
+        else:
+            utils.notify('登录失败，请重新登录')
+            self.login()
+
+
+
+
+       
+
+
