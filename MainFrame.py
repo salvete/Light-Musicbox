@@ -12,11 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow,menu):
+        #记录播放列表的歌的数量
+        self.cnt_song_num = 0
 
         self.index = 0
         self.menu = menu
         self.timer = QtCore.QTimer()
-
 
         ########################################################
         MainWindow.setObjectName("MainWindow")
@@ -30,10 +31,12 @@ class Ui_MainWindow(object):
         self.frame_2.setObjectName("frame_2")
         self.gridLayout = QtWidgets.QGridLayout(self.frame_2)
         self.gridLayout.setObjectName("gridLayout")
+
         self.progressBar = QtWidgets.QProgressBar(self.frame_2)
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
         self.gridLayout.addWidget(self.progressBar, 1, 1, 1, 1)
+
         self.pushButton_3 = QtWidgets.QPushButton(self.frame_2)
         self.pushButton_3.setObjectName("pushButton_3")
         self.gridLayout.addWidget(self.pushButton_3, 1, 0, 1, 1)
@@ -101,6 +104,7 @@ class Ui_MainWindow(object):
         self.pushButton_8 = QtWidgets.QPushButton(self.frame_5)
         self.pushButton_8.setGeometry(QtCore.QRect(590, 170, 90, 27))
         self.pushButton_8.setObjectName("pushButton_8")
+	##播放列表组件
         self.frame_6 = QtWidgets.QFrame(self.centralwidget)
         self.frame_6.setGeometry(QtCore.QRect(0, 0, 101, 541))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -109,6 +113,14 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.frame_6)
         self.label_2.setGeometry(QtCore.QRect(10, 0, 91, 31))
         self.label_2.setObjectName("label_2")
+        #存放音乐播放列表
+        self.frame_6_1 = QtWidgets.QFrame(self.frame_6)
+        self.frame_6_1.setGeometry(QtCore.QRect(-1, 39, 101, 501))
+        self.frame_6_1.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_6_1.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_6_1.setObjectName("frame_6_1")
+        #self.label_100 = QtWidgets.QLabel(self.frame_6_1)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 793, 26))
@@ -188,12 +200,14 @@ class Ui_MainWindow(object):
         self.menu.index = 0
         self.menu.at_playing_list = False
         self.to_play_song(0)
+        self.add_playing_list()    
 
     def clicked_1(self):
         self.index = 1
         self.menu.index = 1
         self.menu.at_playing_list = False
         self.to_play_song(1)
+        self.add_playing_list()
 
 
     def clicked_2(self):
@@ -201,24 +215,31 @@ class Ui_MainWindow(object):
         self.menu.index = 2
         self.menu.at_playing_list = False
         self.to_play_song(2)
+        self.add_playing_list()
+
 
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
         self.menu.at_playing_list = False
         self.to_play_song(3)
+        self.add_playing_list()
+
 
     def clicked_4(self):
         self.index = 4
         self.menu.index = 4
         self.menu.at_playing_list = False
         self.to_play_song(4)
+        self.add_playing_list()
+
 
     def to_play_song(self,idx):
         self.menu.play_which_song(idx)
 
     def time_out(self):
         now,total = self.menu.now_total_time()
+
         self.progressBar.setValue(now/(total+0.00001)*100)
         self.progressBar.repaint()
         self.progressBar.setFormat('{}/{}'.format(self.shift_time(now),self.shift_time(total)))
@@ -229,3 +250,12 @@ class Ui_MainWindow(object):
         m = int(time_val/60);
         s = int(time_val % 60);
         return '{}:{}'.format(m,s)
+
+    ##将当前播放到歌曲添加到播放列表
+    def add_playing_list(self):
+        self.cnt_song_num = self.cnt_song_num+1
+        self.wd = QtWidgets.QLabel(self.frame_6_1)
+        self.wd.setGeometry(QtCore.QRect(0,0+31*(self.cnt_song_num-1),101,31))
+        self.wd.setObjectName("pushbutton_100")
+        self.wd.setText(self.menu.player.current_song["song_name"])
+        self.wd.show()
