@@ -155,6 +155,7 @@ class Ui_MainWindow(object):
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(100)
 
+        self.pushButton_2.setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;")
         self.pushButton_2.clicked.connect(self.login)
 
         self.radioButton.setChecked(True)
@@ -605,6 +606,10 @@ class Ui_MainWindow(object):
 
         if self.menu.to_login(self.username, self.passwd):
             utils.notify('登录成功')
+            self.pushButton_2.setStyleSheet\
+                ("background-color:#99FFFF;border:2px groove gray;border-radius:10px;padding:2px 4px;")
+            self.pushButton_2.setText(self.menu.user['nickname'])
+
         else:
             utils.notify('登录失败，请重新登录')
 
