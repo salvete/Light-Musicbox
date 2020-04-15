@@ -221,7 +221,6 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
-            self.add_playing_list()
         elif self.check_radio == 2:
             pass
         elif self.check_radio == 3:
