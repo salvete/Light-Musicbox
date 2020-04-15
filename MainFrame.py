@@ -16,6 +16,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow, menu):
         # 记录播放列表的歌的数量
         self.cnt_song_num = 0
+        #已经在列表中的歌曲的id
+        self.playing_list_id = {}
 
         self.index = 0
         self.menu = menu
@@ -589,15 +591,19 @@ class Ui_MainWindow(object):
 
     ##将当前播放到歌曲添加到播放列表
     def add_playing_list(self,datalist,idx):
-        self.cnt_song_num = self.cnt_song_num + 1
-        # self.wd = QtWidgets.QLabel(self.frame_6_1)
-        self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,parent=self.frame_6_1)
-        self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
-        self.wd.setObjectName("pushbutton_100")
         song_id = self.menu.storage.database['player_info']['player_list'][idx]
-        song_name = self.menu.storage.database['songs'].get(song_id,{})['song_name']
-        self.wd.setText(song_name)
-        self.wd.show()
+        song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
+
+        if song_id not in self.playing_list_id:
+            self.cnt_song_num = self.cnt_song_num + 1
+            # self.wd = QtWidgets.QLabel(self.frame_6_1)
+            self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,parent=self.frame_6_1)
+            self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
+            self.wd.setObjectName("pushbutton_100")
+            self.wd.setText(song_name)
+            self.wd.show()
+        else:
+            pass
 
 
     def closeEvent(self, e):
