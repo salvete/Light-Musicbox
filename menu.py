@@ -464,7 +464,7 @@ class Menu(object):
                     break;
 
         elif choice == 3:
-            print(self.datalist)
+            # print(self.datalist)
             for idxx, val in enumerate(self.datalist):
                 res.append('{}(专辑)-{}(艺术家)'.format(val['albums_name'], val['artists_name']))
                 if idxx > 10:
