@@ -59,7 +59,14 @@ class MyLabel(QtWidgets.QLabel):
             dia.exec()
 
         elif act.text() == '查看歌词':
-            print('emmmmm')
+            dia = QtWidgets.QDialog()
+            mydia = MyDialog()
+            mydia.setupUi(dia)
+            lyrics = self.MainWindow.menu.api.song_lyric(self.song_id)
+            mydia.showcommend(lyrics)
+            dia.show()
+            dia.exec()
+            
         else:
             pass
 
