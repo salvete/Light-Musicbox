@@ -150,7 +150,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Light Musicbox"))
         self.pushButton_3.setText(_translate("MainWindow", "播放/暂停"))
         self.radioButton.setText(_translate("MainWindow", "歌曲名"))
         self.radioButton_2.setText(_translate("MainWindow", "艺术家"))
@@ -229,14 +229,14 @@ class Ui_MainWindow(object):
             self.label_4.setText('')
             self.label_5.setText('')
             self.label_6.setText('')
-                    
+
             try:
                     self.label.setText(res[0])
                     self.label_3.setText(res[1])
                     self.label_4.setText(res[2])
                     self.label_5.setText(res[3])
                     self.label_6.setText(res[4])
-                    
+
             except  Exception as e:
                 pass
             finally:
