@@ -595,6 +595,7 @@ class Ui_MainWindow(object):
         song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
 
         if song_id not in self.playing_list_id:
+            self.playing_list_id.add(song_id)
             self.cnt_song_num = self.cnt_song_num + 1
             # self.wd = QtWidgets.QLabel(self.frame_6_1)
             self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,parent=self.frame_6_1)
