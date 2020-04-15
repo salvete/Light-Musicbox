@@ -144,6 +144,8 @@ class Ui_MainWindow(object):
 
         self.pushButton_2.clicked.connect(self.login)
 
+        self.radioButton.setChecked(True)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -176,7 +178,15 @@ class Ui_MainWindow(object):
         self.menu.at_playing_list = False
 
         search_info = self.lineEdit.text()
-        res = self.menu.get_songs_info(search_info)
+
+        if self.radioButton.isChecked():
+            res = self.menu.get_songs_info(search_info,1)
+        elif self.radioButton_2.isChecked():
+            res = self.menu.get_songs_info(search_info, 2)
+        elif self.radioButton_3.isChecked():
+            res = self.menu.get_songs_info(search_info, 3)
+        else:
+            res = self.menu.get_songs_info('', 3)
 
         try:
             self.label.setText(res[0])
