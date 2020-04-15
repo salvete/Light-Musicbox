@@ -18,6 +18,7 @@ class MyDialog(object):
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser.setGeometry(QtCore.QRect(0, 0, 611, 301))
         self.textBrowser.setObjectName("textBrowser")
+        self.textBrowser.resize(604,500)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
