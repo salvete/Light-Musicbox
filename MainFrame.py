@@ -11,9 +11,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from login import Ui_Dialog
 import utils
 
+
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow,menu):
-        #记录播放列表的歌的数量
+    def setupUi(self, MainWindow, menu):
+        # 记录播放列表的歌的数量
         self.cnt_song_num = 0
 
         self.index = 0
@@ -108,7 +109,7 @@ class Ui_MainWindow(object):
         self.pushButton_8 = QtWidgets.QPushButton(self.frame_5)
         self.pushButton_8.setGeometry(QtCore.QRect(590, 170, 90, 27))
         self.pushButton_8.setObjectName("pushButton_8")
-	##播放列表组件
+        ##播放列表组件
         self.frame_6 = QtWidgets.QFrame(self.centralwidget)
         self.frame_6.setGeometry(QtCore.QRect(0, 0, 101, 541))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -117,13 +118,13 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.frame_6)
         self.label_2.setGeometry(QtCore.QRect(10, 0, 91, 31))
         self.label_2.setObjectName("label_2")
-        #存放音乐播放列表
+        # 存放音乐播放列表
         self.frame_6_1 = QtWidgets.QFrame(self.frame_6)
         self.frame_6_1.setGeometry(QtCore.QRect(-1, 39, 101, 501))
         self.frame_6_1.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_6_1.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_6_1.setObjectName("frame_6_1")
-        #self.label_100 = QtWidgets.QLabel(self.frame_6_1)
+        # self.label_100 = QtWidgets.QLabel(self.frame_6_1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -136,7 +137,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
 
         ##################################################
         self.pushButton.clicked.connect(self.search)
@@ -158,7 +158,6 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(self.login)
 
         self.radioButton.setChecked(True)
-
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -194,7 +193,7 @@ class Ui_MainWindow(object):
 
         if self.radioButton.isChecked():
             self.check_radio = 1
-            res = self.menu.get_songs_info(search_info,1)
+            res = self.menu.get_songs_info(search_info, 1)
         elif self.radioButton_2.isChecked():
             self.check_radio = 2
             res = self.menu.get_songs_info(search_info, 2)
@@ -216,20 +215,19 @@ class Ui_MainWindow(object):
         finally:
             pass
 
-
     def clicked_0(self):
         self.index = 0
         self.menu.index = 0
 
-
         if self.check_radio == 1:
             self.to_play_song(self.index)
+            self.add_playing_list()
         elif self.check_radio == 2:
             pass
         elif self.check_radio == 3:
             self.check_radio = 1
             album_id = self.menu.datalist[self.index]["album_id"]
-            songs =self.menu.api.album(album_id)
+            songs = self.menu.api.album(album_id)
             self.menu.datatype = "songs"
             self.menu.datalist = self.menu.api.dig_info(songs, "songs")
             res = []
@@ -244,11 +242,11 @@ class Ui_MainWindow(object):
             self.label_6.setText('')
 
             try:
-                    self.label.setText(res[0])
-                    self.label_3.setText(res[1])
-                    self.label_4.setText(res[2])
-                    self.label_5.setText(res[3])
-                    self.label_6.setText(res[4])
+                self.label.setText(res[0])
+                self.label_3.setText(res[1])
+                self.label_4.setText(res[2])
+                self.label_5.setText(res[3])
+                self.label_6.setText(res[4])
 
             except  Exception as e:
                 pass
@@ -257,7 +255,6 @@ class Ui_MainWindow(object):
 
         else:
             pass
-
 
     def clicked_1(self):
         self.index = 1
@@ -270,7 +267,7 @@ class Ui_MainWindow(object):
         elif self.check_radio == 3:
             self.check_radio = 1
             album_id = self.menu.datalist[self.index]["album_id"]
-            songs =self.menu.api.album(album_id)
+            songs = self.menu.api.album(album_id)
             self.menu.datatype = "songs"
             self.menu.datalist = self.menu.api.dig_info(songs, "songs")
             res = []
@@ -285,11 +282,11 @@ class Ui_MainWindow(object):
             self.label_6.setText('')
 
             try:
-                    self.label.setText(res[0])
-                    self.label_3.setText(res[1])
-                    self.label_4.setText(res[2])
-                    self.label_5.setText(res[3])
-                    self.label_6.setText(res[4])
+                self.label.setText(res[0])
+                self.label_3.setText(res[1])
+                self.label_4.setText(res[2])
+                self.label_5.setText(res[3])
+                self.label_6.setText(res[4])
 
             except  Exception as e:
                 pass
@@ -310,7 +307,7 @@ class Ui_MainWindow(object):
         elif self.check_radio == 3:
             self.check_radio = 1
             album_id = self.menu.datalist[self.index]["album_id"]
-            songs =self.menu.api.album(album_id)
+            songs = self.menu.api.album(album_id)
             self.menu.datatype = "songs"
             self.menu.datalist = self.menu.api.dig_info(songs, "songs")
             res = []
@@ -325,11 +322,11 @@ class Ui_MainWindow(object):
             self.label_6.setText('')
 
             try:
-                    self.label.setText(res[0])
-                    self.label_3.setText(res[1])
-                    self.label_4.setText(res[2])
-                    self.label_5.setText(res[3])
-                    self.label_6.setText(res[4])
+                self.label.setText(res[0])
+                self.label_3.setText(res[1])
+                self.label_4.setText(res[2])
+                self.label_5.setText(res[3])
+                self.label_6.setText(res[4])
 
             except  Exception as e:
                 pass
@@ -339,11 +336,9 @@ class Ui_MainWindow(object):
         else:
             pass
 
-
     def clicked_3(self):
         self.index = 3
         self.menu.index = 4
-
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
@@ -352,7 +347,7 @@ class Ui_MainWindow(object):
         elif self.check_radio == 3:
             self.check_radio = 1
             album_id = self.menu.datalist[self.index]["album_id"]
-            songs =self.menu.api.album(album_id)
+            songs = self.menu.api.album(album_id)
             self.menu.datatype = "songs"
             self.menu.datalist = self.menu.api.dig_info(songs, "songs")
             res = []
@@ -367,11 +362,11 @@ class Ui_MainWindow(object):
             self.label_6.setText('')
 
             try:
-                    self.label.setText(res[0])
-                    self.label_3.setText(res[1])
-                    self.label_4.setText(res[2])
-                    self.label_5.setText(res[3])
-                    self.label_6.setText(res[4])
+                self.label.setText(res[0])
+                self.label_3.setText(res[1])
+                self.label_4.setText(res[2])
+                self.label_5.setText(res[3])
+                self.label_6.setText(res[4])
 
             except  Exception as e:
                 pass
@@ -392,7 +387,7 @@ class Ui_MainWindow(object):
         elif self.check_radio == 3:
             self.check_radio = 1
             album_id = self.menu.datalist[self.index]["album_id"]
-            songs =self.menu.api.album(album_id)
+            songs = self.menu.api.album(album_id)
             self.menu.datatype = "songs"
             self.menu.datalist = self.menu.api.dig_info(songs, "songs")
             res = []
@@ -407,11 +402,11 @@ class Ui_MainWindow(object):
             self.label_6.setText('')
 
             try:
-                    self.label.setText(res[0])
-                    self.label_3.setText(res[1])
-                    self.label_4.setText(res[2])
-                    self.label_5.setText(res[3])
-                    self.label_6.setText(res[4])
+                self.label.setText(res[0])
+                self.label_3.setText(res[1])
+                self.label_4.setText(res[2])
+                self.label_5.setText(res[3])
+                self.label_6.setText(res[4])
 
             except  Exception as e:
                 pass
@@ -421,45 +416,50 @@ class Ui_MainWindow(object):
         else:
             pass
 
-    def to_play_song(self,idx):
+    def to_play_song(self, idx):
         self.menu.play_which_song(idx)
 
     def time_out(self):
-        now,total = self.menu.now_total_time()
+        now, total = self.menu.now_total_time()
 
-        self.progressBar.setValue(now/(total+0.00001)*100)
+        self.progressBar.setValue(now / (total + 0.00001) * 100)
         self.progressBar.repaint()
-        self.progressBar.setFormat('{}/{}'.format(self.shift_time(now),self.shift_time(total)))
+        self.progressBar.setFormat('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
 
         # print('{}/{}'.format(self.shift_time(now), self.shift_time(total)))
-        
-    def shift_time(self,time_val):
-        m = int(time_val/60);
+
+    def shift_time(self, time_val):
+        m = int(time_val / 60);
         s = int(time_val % 60);
-        return '{}:{}'.format(m,s)
+        return '{}:{}'.format(m, s)
+
     ##将当前播放到歌曲添加到播放列表
     def add_playing_list(self):
-        self.cnt_song_num = self.cnt_song_num+1
+        self.cnt_song_num = self.cnt_song_num + 1
         self.wd = QtWidgets.QLabel(self.frame_6_1)
-        self.wd.setGeometry(QtCore.QRect(0,0+31*(self.cnt_song_num-1),101,31))
+        self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
         self.wd.setObjectName("pushbutton_100")
         self.wd.setText(self.menu.player.current_song["song_name"])
+        self.wd.mouseDoubleClickEvent.connect(self.test_fun)
         self.wd.show()
 
-    def closeEvent(self,e):
-            self.menu.player.stop()
-            self.menu.storage.save()
-            self.menu.api.logout()
+    def test_fun(self,e):
+        print('hello,world')
+
+    def closeEvent(self, e):
+        self.menu.player.stop()
+        self.menu.storage.save()
+        self.menu.api.logout()
 
     def login(self):
 
         dia = QtWidgets.QDialog()
         lgin = Ui_Dialog()
-        lgin.setupUi(dia,self)
+        lgin.setupUi(dia, self)
         dia.show()
         dia.exec()
 
-        if self.menu.to_login(self.username,self.passwd):
+        if self.menu.to_login(self.username, self.passwd):
             utils.notify('登录成功')
         else:
             utils.notify('登录失败，请重新登录')
@@ -467,6 +467,6 @@ class Ui_MainWindow(object):
 
 
 
-       
+
 
 
