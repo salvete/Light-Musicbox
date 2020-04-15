@@ -32,7 +32,7 @@ class MyLabel(QtWidgets.QLabel):
 
     # 右键菜单项点击处理
     def actionHandler(self, act):
-        print(act.text())
+        # print(act.text())
         if act.text() == '播放':
             self.MainWindow.menu.datalist = self.datalist
             self.MainWindow.menu.at_playing_list = False
