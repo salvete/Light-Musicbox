@@ -11,14 +11,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import time
 
-
 class MyDialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(604, 300)
+        Dialog.resize(604, 500)
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser.setGeometry(QtCore.QRect(0, 0, 611, 301))
         self.textBrowser.setObjectName("textBrowser")
+        self.textBrowser.resize(604,500)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -31,7 +31,7 @@ class MyDialog(object):
         for i in content:
             self.textBrowser.append(i)
             self.textBrowser.moveCursor(self.textBrowser.textCursor().End)
-            time.sleep(0.2)
+            # time.sleep(0.001)
 
 
 if __name__ == '__main__':

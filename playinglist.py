@@ -1,34 +1,76 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMenu, QAction
-
+from cmt_lrc import MyDialog
 
 class MyLabel(QtWidgets.QLabel):
-    def __init__(self, parent=None):
+    def __init__(self,MainWindow,datalist,idx,song_id, parent=None):
         super(MyLabel, self).__init__(parent)
+        self.MainWindow = MainWindow
+        self.datalist = datalist
+        self.idx = idx
+        self.song_id = song_id
         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.rightMenuShow)
 
     # 双击播放响应
     def mouseDoubleClickEvent(self, e):
-        print('mouse double clicked')
+        self.MainWindow.menu.datalist = self.datalist
+        self.MainWindow.menu.at_playing_list = False
+        self.MainWindow.menu.index = self.idx
+        self.MainWindow.to_play_song(self.idx)
 
     # 右键菜单项生成
     def rightMenuShow(self, pos):
         rmenu = QMenu(self)
         self.op1 = rmenu.addAction(QtWidgets.QAction('播放', rmenu))
-        self.op2 = rmenu.addAction(QtWidgets.QAction('删除', rmenu))
         self.op3 = rmenu.addAction(QtWidgets.QAction('查看歌词', rmenu))
         self.op4 = rmenu.addAction(QtWidgets.QAction('查看评论', rmenu))
+        self.op2 = rmenu.addAction(QtWidgets.QAction('删除', rmenu))
 
         rmenu.triggered.connect(self.actionHandler)
         rmenu.exec_(QtGui.QCursor.pos())
 
     # 右键菜单项点击处理
     def actionHandler(self, act):
-        print(act.text())
+        # print(act.text())
         if act.text() == '播放':
-            print("hello,world!")
+            self.MainWindow.menu.datalist = self.datalist
+            self.MainWindow.menu.at_playing_list = False
+            self.MainWindow.menu.index = self.idx
+            self.MainWindow.to_play_song(self.idx)
+        elif act.text() == '查看评论':
+            dia = QtWidgets.QDialog()
+            mydia = MyDialog()
+            mydia.setupUi(dia)
+            comments = self.MainWindow.menu.api.song_comments(self.song_id, limit=100)
+            try:
+                hotcomments = comments["hotComments"]
+                comcomments = comments["comments"]
+            except KeyError:
+                hotcomments = comcomments = []
+            to_display = []
+            for one_comment in hotcomments:
+                to_display.append('有{}人觉得很赞\t{}\t{}\n\n'.format(one_comment["likedCount"],\
+                one_comment["user"]["nickname"], one_comment["content"]))
+
+            mydia.showcommend(to_display)
+            dia.setWindowTitle('评论')
+            dia.show()
+            dia.exec()
+
+        elif act.text() == '查看歌词':
+            dia = QtWidgets.QDialog()
+            mydia = MyDialog()
+            mydia.setupUi(dia)
+            lyrics = self.MainWindow.menu.api.song_lyric(self.song_id)
+            mydia.showcommend(lyrics)
+            dia.setWindowTitle('歌词')
+            dia.show()
+            dia.exec()
+
+        else:
+            pass
 
     def mouseReleaseEvent(self, e):
         pass
