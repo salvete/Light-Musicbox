@@ -16,6 +16,9 @@ import time
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, menu):
+        #显示内容
+        display_info = []
+        cur_page = 0
         # 记录播放列表的歌的数量
         self.cnt_song_num = 0
         self.record = []
@@ -115,6 +118,16 @@ class Ui_MainWindow(object):
         self.pushButton_8 = QtWidgets.QPushButton(self.frame_5)
         self.pushButton_8.setGeometry(QtCore.QRect(590, 170, 90, 27))
         self.pushButton_8.setObjectName("pushButton_8")
+
+        ##上下翻页
+        self.pushButton_9 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_9.setGeometry(QtCore.QRect(180,230,90,27))
+        self.pushButton_9.setObjectName("pushButton_9")
+
+        self.pushButton_10 = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_10.setGeometry(QtCore.QRect(410, 230, 90, 27))
+        self.pushButton_10.setObjectName("pushButton_10")
+
         ##播放列表组件
         self.frame_6 = QtWidgets.QFrame(self.centralwidget)
         self.frame_6.setGeometry(QtCore.QRect(0, 0, 101, 541))
@@ -155,6 +168,9 @@ class Ui_MainWindow(object):
         self.pushButton_7.clicked.connect(self.clicked_3)
         self.pushButton_8.clicked.connect(self.clicked_4)
 
+        self.pushButton_9.clicked.connect(self.prev_page)
+        self.pushButton_10.clicked.connect(self.next_page)
+
         self.timer.timeout.connect(self.time_out)
         self.timer.start(1000)
 
@@ -187,6 +203,8 @@ class Ui_MainWindow(object):
         self.pushButton_6.setText(_translate("MainWindow", "确定"))
         self.pushButton_7.setText(_translate("MainWindow", "确定"))
         self.pushButton_8.setText(_translate("MainWindow", "确定"))
+        self.pushButton_9.setText(_translate("MainWindow","上一页"))
+        self.pushButton_10.setText(_translate("MainWindow","下一页"))
         self.label_2.setText(_translate("MainWindow", "列表"))
 
     def play_or_pause(self):
@@ -210,6 +228,10 @@ class Ui_MainWindow(object):
         else:
             self.check_radio = -1
             res = self.menu.get_songs_info('', 3)
+
+        self.display_info = res
+        self.pushButton_9.setDisabled(True)
+        self.cur_page = 0
 
         self.label.setText('')
         self.label_3.setText('')
@@ -673,5 +695,47 @@ class Ui_MainWindow(object):
 
 
 
+    def next_page(self):
+        self.cur_page += 1
+        self.pushButton_9.setDisabled(False)
+        if self.cur_page*5 > len(self.display_info):
+            self.pushButton_10.setDisabled(True)
+        self.label.setText('')
+        self.label_3.setText('')
+        self.label_4.setText('')
+        self.label_5.setText('')
+        self.label_6.setText('')
+
+        try:
+            self.label.setText(self.display_info[0+self.cur_page*5])
+            self.label_3.setText(self.display_info[1+self.cur_page*5])
+            self.label_4.setText(self.display_info[2+self.cur_page*5])
+            self.label_5.setText(self.display_info[3+self.cur_page*5])
+            self.label_6.setText(self.display_info[4+self.cur_page*5])
+        except  Exception as e:
+            pass
+        finally:
+            pass
 
 
+    def prev_page(self):
+        self.cur_page -= 1
+        self.pushButton_10.setDisabled(False)
+        if self.cur_page == 0:
+            self.pushButton_9.setDisabled(True)
+        self.label.setText('')
+        self.label_3.setText('')
+        self.label_4.setText('')
+        self.label_5.setText('')
+        self.label_6.setText('')
+
+        try:
+            self.label.setText(self.display_info[0+self.cur_page*5])
+            self.label_3.setText(self.display_info[1+self.cur_page*5])
+            self.label_4.setText(self.display_info[2+self.cur_page*5])
+            self.label_5.setText(self.display_info[3+self.cur_page*5])
+            self.label_6.setText(self.display_info[4+self.cur_page*5])
+        except  Exception as e:
+            pass
+        finally:
+            pass

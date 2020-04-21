@@ -455,20 +455,20 @@ class Menu(object):
         if choice == 1:
             for idxx, val in enumerate(self.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+                # if idxx > 10:
+                #     break;
         elif choice == 2:
             for idxx, val in enumerate(self.datalist):
                 res.append('艺术家:{}'.format(val['artists_name']))
-                if idxx > 10:
-                    break;
+                # if idxx > 10:
+                #     break;
 
         elif choice == 3:
             # print(self.datalist)
             for idxx, val in enumerate(self.datalist):
                 res.append('{}(专辑)-{}(艺术家)'.format(val['albums_name'], val['artists_name']))
-                if idxx > 10:
-                    break;
+                # if idxx > 10:
+                #     break;
         else:
             pass
 
