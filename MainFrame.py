@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
         self.label_page.setObjectName("page_label")
 
         self.pushButton_10 = QtWidgets.QPushButton(self.frame_5)
-        self.pushButton_10.setGeometry(QtCore.QRect(410, 230, 90, 27))
+        self.pushButton_10.setGeometry(QtCore.QRect(400, 230, 90, 27))
         self.pushButton_10.setObjectName("pushButton_10")
 
         ##播放列表组件
@@ -726,7 +726,7 @@ class Ui_MainWindow(object):
     def closeEvent(self, e):
         self.menu.player.stop()
         self.menu.storage.save()
-        self.menu.api.logout()
+        # self.menu.api.logout()
 
     def login(self):
 
