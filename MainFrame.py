@@ -597,6 +597,8 @@ class Ui_MainWindow(object):
         song_id = self.menu.storage.database['player_info']['player_list'][idx]
         song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
 
+
+
         if song_id not in self.playing_list_id:
             self.playing_list_id.append(song_id)
             self.cnt_song_num = self.cnt_song_num + 1
@@ -609,10 +611,11 @@ class Ui_MainWindow(object):
             self.wd.show()
             self.record.append(self.wd)
 
-            self.label_color(song_id)
         # print(self.record)
         else:
             pass
+
+        self.label_color(song_id)
 
     def paint_list(self):
         for aa in self.record:
@@ -665,7 +668,7 @@ class Ui_MainWindow(object):
                 i.setStyleSheet("background-color:#00FF66;")
                 i.update()
             else:
-                i.setStyleSheet("background-color:#CCFFFF;")
+                i.setStyleSheet("background-color:#DDDDDD;")
                 i.update()
 
 
