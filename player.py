@@ -358,6 +358,8 @@ class Player(object):
         if not self.current_song:
             return
 
+        self.stop()
+        
         self.playing_flag = True
         self.build_playinfo()
         self.notify_playing()
