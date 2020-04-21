@@ -231,6 +231,7 @@ class Ui_MainWindow(object):
 
         self.display_info = res
         self.pushButton_9.setDisabled(True)
+        self.pushButton_10.setDisabled(False)
         self.cur_page = 0
 
         self.label.setText('')
@@ -268,8 +269,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -297,8 +302,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -337,8 +346,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -366,8 +379,13 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -407,8 +425,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -436,8 +458,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -476,8 +502,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -505,8 +535,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -545,8 +579,13 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
@@ -574,8 +613,12 @@ class Ui_MainWindow(object):
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
-                if idxx > 10:
-                    break;
+
+            self.display_info = res
+            self.pushButton_9.setDisabled(True)
+            self.pushButton_10.setDisabled(False)
+            self.cur_page = 0
+
             self.label.setText('')
             self.label_3.setText('')
             self.label_4.setText('')
