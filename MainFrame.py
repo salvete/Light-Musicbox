@@ -253,8 +253,8 @@ class Ui_MainWindow(object):
 
     # 点击右侧按钮逻辑处理
     def clicked_0(self):
-        self.index = 0
-        self.menu.index = 0
+        self.index = 0+self.cur_page*5
+        self.menu.index = 0+self.cur_page*5
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
@@ -330,8 +330,8 @@ class Ui_MainWindow(object):
             pass
 
     def clicked_1(self):
-        self.index = 1
-        self.menu.index = 1
+        self.index = 1+self.cur_page*5
+        self.menu.index = 1+self.cur_page*5
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
@@ -408,8 +408,8 @@ class Ui_MainWindow(object):
             pass
 
     def clicked_2(self):
-        self.index = 2
-        self.menu.index = 2
+        self.index = 2+self.cur_page*5
+        self.menu.index = 2+self.cur_page*5
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
@@ -486,8 +486,8 @@ class Ui_MainWindow(object):
             pass
 
     def clicked_3(self):
-        self.index = 3
-        self.menu.index = 4
+        self.index = 3+self.cur_page*5
+        self.menu.index = 3+self.cur_page*5
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
@@ -563,8 +563,8 @@ class Ui_MainWindow(object):
             pass
 
     def clicked_4(self):
-        self.index = 4
-        self.menu.index = 4
+        self.index = 4+self.cur_page*5
+        self.menu.index = 4+self.cur_page*5
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
