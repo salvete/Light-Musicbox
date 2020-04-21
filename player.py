@@ -396,6 +396,7 @@ class Player(object):
         if self.index == idx and switch_flag:
             if not self.popen_handler:
                 # print('aaaaaa')
+                self.stop()
                 self.replay()
             else:
                 # print('bbbbbb')
