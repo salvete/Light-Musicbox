@@ -121,8 +121,11 @@ class Ui_MainWindow(object):
 
         ##上下翻页
         self.pushButton_9 = QtWidgets.QPushButton(self.frame_5)
-        self.pushButton_9.setGeometry(QtCore.QRect(180,230,90,27))
+        self.pushButton_9.setGeometry(QtCore.QRect(80,230,90,27))
         self.pushButton_9.setObjectName("pushButton_9")
+        self.label_page = QtWidgets.QLabel(self.frame_5)
+        self.label_page.setGeometry(QtCore.QRect(250,230,72,31))
+        self.label_page.setObjectName("page_label")
 
         self.pushButton_10 = QtWidgets.QPushButton(self.frame_5)
         self.pushButton_10.setGeometry(QtCore.QRect(410, 230, 90, 27))
@@ -206,6 +209,11 @@ class Ui_MainWindow(object):
         self.pushButton_9.setText(_translate("MainWindow","上一页"))
         self.pushButton_10.setText(_translate("MainWindow","下一页"))
         self.label_2.setText(_translate("MainWindow", "列表"))
+        self.label_page.setText(_translate("MainWindow","第1页"))
+
+        self.pushButton_9.setDisabled(True)
+        self.pushButton_10.setDisabled(True)
+
 
     def play_or_pause(self):
         self.menu.at_playing_list = True
@@ -233,6 +241,7 @@ class Ui_MainWindow(object):
         self.pushButton_9.setDisabled(True)
         self.pushButton_10.setDisabled(False)
         self.cur_page = 0
+        self.label_page.setText('第'+str(self.cur_page+1)+'页')
 
         self.label.setText('')
         self.label_3.setText('')
@@ -274,6 +283,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -307,6 +317,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -351,6 +362,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -384,6 +396,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
 
             self.label.setText('')
@@ -430,6 +443,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -463,6 +477,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -507,6 +522,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -540,6 +556,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -584,6 +601,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
 
             self.label.setText('')
@@ -618,6 +636,7 @@ class Ui_MainWindow(object):
             self.pushButton_9.setDisabled(True)
             self.pushButton_10.setDisabled(False)
             self.cur_page = 0
+            self.label_page.setText('第' + str(self.cur_page + 1) + '页')
 
             self.label.setText('')
             self.label_3.setText('')
@@ -740,6 +759,7 @@ class Ui_MainWindow(object):
 
     def next_page(self):
         self.cur_page += 1
+        self.label_page.setText('第' + str(self.cur_page + 1) + '页')
         self.pushButton_9.setDisabled(False)
         if self.cur_page*5 > len(self.display_info):
             self.pushButton_10.setDisabled(True)
@@ -763,6 +783,7 @@ class Ui_MainWindow(object):
 
     def prev_page(self):
         self.cur_page -= 1
+        self.label_page.setText('第' + str(self.cur_page + 1) + '页')
         self.pushButton_10.setDisabled(False)
         if self.cur_page == 0:
             self.pushButton_9.setDisabled(True)
