@@ -73,9 +73,18 @@ class MyLabel(QtWidgets.QLabel):
             dia.exec()
 
         else:
-            self.now_playing_list_id.remove(self.song_id)
-            self.close()
-            self.deleteLater()
+            self.MainWindow.cnt_song_num -= 1
+           # print('shan zhi qian：')
+           # print(self.MainWindow.playing_list_id)
+            self.MainWindow.playing_list_id.remove(self.song_id)
+           # print('山之后')
+           # print(self.MainWindow.playing_list_id)
+           # print(self.now_playing_list_id)
+            self.MainWindow.paint_list()
+
+    def deny(self):
+        self.close()
+        self.deleteLater()
 
     def mouseReleaseEvent(self, e):
         pass

@@ -12,13 +12,16 @@ from login import Ui_Dialog
 import utils
 from playinglist import MyLabel
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, menu):
         # 记录播放列表的歌的数量
         self.cnt_song_num = 0
+        self.record =[]
         #已经在列表中的歌曲的id
-        self.playing_list_id = set()
-
+        self.playing_list_id = []
+       # self.playing_list_id_sort = []
+        cnt_song_num = 0
         self.index = 0
         self.menu = menu
         self.timer = QtCore.QTimer()
@@ -593,9 +596,9 @@ class Ui_MainWindow(object):
     def add_playing_list(self,datalist,idx):
         song_id = self.menu.storage.database['player_info']['player_list'][idx]
         song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
-
+        
         if song_id not in self.playing_list_id:
-            self.playing_list_id.add(song_id)
+            self.playing_list_id.append(song_id)           
             self.cnt_song_num = self.cnt_song_num + 1
             # self.wd = QtWidgets.QLabel(self.frame_6_1)
             self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,song_id=song_id,now_playing_list_id=self.playing_list_id,parent=self.frame_6_1)
@@ -603,9 +606,29 @@ class Ui_MainWindow(object):
             self.wd.setObjectName("pushbutton_100")
             self.wd.setText(song_name)
             self.wd.show()
+            self.record.append(self.wd)
+           # print(self.record)
         else:
             pass
-
+    def paint_list(self):
+        for aa in self.record:
+            aa.deny()
+        self.cnt_song_num = 0
+        self.record.clear()
+        for ev in self.playing_list_id:
+            datalist=self.menu.datalist
+            idx=self.index
+            song_id = ev
+            song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
+            self.cnt_song_num += 1
+            self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,song_id=song_id,now_playing_list_id=self.playing_list_id,parent=self.frame_6_1)
+            self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
+            self.wd.setObjectName("pushbutton_100")
+            self.wd.setText(song_name)
+            self.wd.show()
+            self.record.append(self.wd)
+       # print('left:')
+       # print(self.cnt_song_num)
 
     def closeEvent(self, e):
         self.menu.player.stop()
