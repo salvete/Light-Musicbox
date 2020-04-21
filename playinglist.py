@@ -20,6 +20,8 @@ class MyLabel(QtWidgets.QLabel):
         self.MainWindow.menu.at_playing_list = False
         self.MainWindow.menu.index = self.idx
         self.MainWindow.to_play_song(self.idx)
+        
+        self.MainWindow.label_color(self.song_id)
 
     # 右键菜单项生成
     def rightMenuShow(self, pos):
@@ -42,6 +44,9 @@ class MyLabel(QtWidgets.QLabel):
             self.MainWindow.menu.at_playing_list = False
             self.MainWindow.menu.index = self.idx
             self.MainWindow.to_play_song(self.idx)
+            
+            self.MainWindow.label_color(self.song_id)
+            
         elif act.text() == '查看评论':
             dia = QtWidgets.QDialog()
             mydia = MyDialog()
