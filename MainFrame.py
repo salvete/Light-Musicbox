@@ -11,16 +11,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from login import Ui_Dialog
 import utils
 from playinglist import MyLabel
+import time
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, menu):
         # 记录播放列表的歌的数量
         self.cnt_song_num = 0
-        self.record =[]
-        #已经在列表中的歌曲的id
+        self.record = []
+        # 已经在列表中的歌曲的id
         self.playing_list_id = []
-       # self.playing_list_id_sort = []
+        # self.playing_list_id_sort = []
         cnt_song_num = 0
         self.index = 0
         self.menu = menu
@@ -216,7 +217,6 @@ class Ui_MainWindow(object):
         self.label_5.setText('')
         self.label_6.setText('')
 
-
         try:
             self.label.setText(res[0])
             self.label_3.setText(res[1])
@@ -242,7 +242,7 @@ class Ui_MainWindow(object):
             artist_id = self.menu.datalist[self.index]['artist_id']
             self.menu.datatype = 'songs'
             songs = self.menu.api.artists(artist_id)
-            self.menu.datalist = self.menu.api.dig_info(songs,'songs')
+            self.menu.datalist = self.menu.api.dig_info(songs, 'songs')
             res = []
             for idxx, val in enumerate(self.menu.datalist):
                 res.append('{}(歌曲名)-{}(艺术家))'.format(val['song_name'], val['artist']))
@@ -304,7 +304,7 @@ class Ui_MainWindow(object):
 
         if self.check_radio == 1:
             self.to_play_song(self.index)
-            self.add_playing_list(self.menu.datalist,self.index)
+            self.add_playing_list(self.menu.datalist, self.index)
 
         elif self.check_radio == 2:
             self.check_radio = 1
@@ -593,42 +593,48 @@ class Ui_MainWindow(object):
         return '{}:{}'.format(m, s)
 
     ##将当前播放到歌曲添加到播放列表
-    def add_playing_list(self,datalist,idx):
+    def add_playing_list(self, datalist, idx):
         song_id = self.menu.storage.database['player_info']['player_list'][idx]
         song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
-        
+
         if song_id not in self.playing_list_id:
-            self.playing_list_id.append(song_id)           
+            self.playing_list_id.append(song_id)
             self.cnt_song_num = self.cnt_song_num + 1
             # self.wd = QtWidgets.QLabel(self.frame_6_1)
-            self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,song_id=song_id,now_playing_list_id=self.playing_list_id,parent=self.frame_6_1)
+            self.wd = MyLabel(MainWindow=self, datalist=datalist, idx=idx, song_id=song_id,
+                              now_playing_list_id=self.playing_list_id, parent=self.frame_6_1)
             self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
             self.wd.setObjectName("pushbutton_100")
             self.wd.setText(song_name)
             self.wd.show()
             self.record.append(self.wd)
-           # print(self.record)
+
+            self.label_color(song_id)
+        # print(self.record)
         else:
             pass
+
     def paint_list(self):
         for aa in self.record:
             aa.deny()
         self.cnt_song_num = 0
         self.record.clear()
         for ev in self.playing_list_id:
-            datalist=self.menu.datalist
-            idx=self.index
+            datalist = self.menu.datalist
+            idx = self.index
             song_id = ev
             song_name = self.menu.storage.database['songs'].get(song_id, {})['song_name']
             self.cnt_song_num += 1
-            self.wd = MyLabel(MainWindow=self,datalist=datalist,idx=idx,song_id=song_id,now_playing_list_id=self.playing_list_id,parent=self.frame_6_1)
+            self.wd = MyLabel(MainWindow=self, datalist=datalist, idx=idx, song_id=song_id,
+                              now_playing_list_id=self.playing_list_id, parent=self.frame_6_1)
             self.wd.setGeometry(QtCore.QRect(0, 0 + 31 * (self.cnt_song_num - 1), 101, 31))
             self.wd.setObjectName("pushbutton_100")
             self.wd.setText(song_name)
             self.wd.show()
             self.record.append(self.wd)
-       # print('left:')
-       # print(self.cnt_song_num)
+
+    # print('left:')
+    # print(self.cnt_song_num)
 
     def closeEvent(self, e):
         self.menu.player.stop()
@@ -645,7 +651,7 @@ class Ui_MainWindow(object):
 
         if self.menu.to_login(self.username, self.passwd):
             utils.notify('登录成功')
-            self.pushButton_2.setStyleSheet\
+            self.pushButton_2.setStyleSheet \
                 ("background-color:#99FFFF;border:2px groove gray;border-radius:10px;padding:2px 4px;")
             self.pushButton_2.setText(self.menu.user['nickname'])
 
@@ -653,6 +659,14 @@ class Ui_MainWindow(object):
             utils.notify('登录失败，请重新登录')
 
 
+    def label_color(self,song_id):
+        for i in self.record:
+            if i.song_id == song_id:
+                i.setStyleSheet("background-color:#00FF66;")
+                i.update()
+            else:
+                i.setStyleSheet("background-color:#CCFFFF;")
+                i.update()
 
 
 
