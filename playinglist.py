@@ -4,12 +4,13 @@ from PyQt5.QtWidgets import QApplication, QMenu, QAction
 from cmt_lrc import MyDialog
 
 class MyLabel(QtWidgets.QLabel):
-    def __init__(self,MainWindow,datalist,idx,song_id, parent=None):
+    def __init__(self,MainWindow,datalist,idx,song_id,now_playing_list_id, parent=None):
         super(MyLabel, self).__init__(parent)
         self.MainWindow = MainWindow
         self.datalist = datalist
         self.idx = idx
         self.song_id = song_id
+        self.now_playing_list_id = now_playing_list_id
         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.rightMenuShow)
 
@@ -31,6 +32,8 @@ class MyLabel(QtWidgets.QLabel):
         rmenu.triggered.connect(self.actionHandler)
         rmenu.exec_(QtGui.QCursor.pos())
 
+    #def __del__(self):
+     #   pass
     # 右键菜单项点击处理
     def actionHandler(self, act):
         # print(act.text())
@@ -70,7 +73,9 @@ class MyLabel(QtWidgets.QLabel):
             dia.exec()
 
         else:
-            pass
+            self.now_playing_list_id.remove(self.song_id)
+            self.close()
+            self.deleteLater()
 
     def mouseReleaseEvent(self, e):
         pass
