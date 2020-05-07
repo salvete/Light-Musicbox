@@ -7,6 +7,15 @@ class UI(QMainWindow,Ui_MainWindow):
         super(UI,self).__init__(parent)
         self.setupUi(self,menu)
 
+
+def start_here():
+    app = QApplication(sys.argv)
+    menu = Menu()
+    ui = UI(menu)
+    ui.show()
+    sys.exit(app.exec_())
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     menu = Menu()
