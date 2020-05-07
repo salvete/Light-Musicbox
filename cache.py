@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Author: Catofes
-# @Date:   2015-08-15
+
 """
 Class to cache songs into local storage.
 """

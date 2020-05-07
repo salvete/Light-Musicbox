@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # utils.py --- utils for musicbox
-# Copyright (c) 2015-2016 omi & Contributors
+
 from __future__ import print_function, unicode_literals, division, absolute_import
 
 import platform
