@@ -1,5 +1,4 @@
-import ui.start_here
-
+from ui import start_here
 def main():
 	start_here()
 
